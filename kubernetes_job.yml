@@ -4,6 +4,8 @@ metadata:
   name: give-your-job-a-name:
   namespace: gp-engine-mizzou-mindful
 spec:
+  backoffLimit: 0
+  completions: 1
   template:
     metadata:
       name: pytorch-training-pod
@@ -14,20 +16,20 @@ spec:
         image: gitlab-registry.nrp-nautilus.io/jdapm8/docker-pytorch-example:latest
         command: ["/bin/bash", "-c"]
         # this "args" param is where the start command goes
-        args: ["nvidia-smi && cd /workspace/models && pwd && ls && python3 ./pytorch_example.py"]
+        args: ["nvidia-smi && cd /root && pwd && ls && python3 ./pytorch_example.py"]
         volumeMounts:
-        - name: output_private_volume
+        - name: output-private-volume
           mountPath: /root/host_fs
         resources:
             requests:
-              memory: "4Gi"
-              cpu: "2"
+              memory: "8Gi"
+              cpu: "4"
               nvidia.com/gpu: "1"
             limits:
-              memory: "16Gi"
+              memory: "8Gi"
               cpu: "4"
               nvidia.com/gpu: "1"
       volumes:
-      - name: output_private_volume
+      - name: output-private-volume
         persistentVolumeClaim:
           claimName: name-of-your-private-volume:

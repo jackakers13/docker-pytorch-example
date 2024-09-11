@@ -40,10 +40,13 @@
 - `kublectl apply -f kubernetes_job.yml`
 - To monitor its output
   - `kubectl get pods --selector=job-name=<job-name>` to find pod name
-  - `kubectl logs -f <pod-name>`
+  - `kubectl describe pod <pod-name>` to view status - may take several minutes for pod to start (took 6:14 for me during a test run)
+  - `kubectl logs -f <pod-name>` to view pod logs
+- MAKE SURE TO DELETE THE JOB ONCE YOU'RE DONE! See "Cleanup" section below.
 
 ### Download the trained model
-- `kubectl apply -f kublectl apply -f kubernetes_idle.yml`
+- `kubectl apply -f kubernetes_idle.yml`
+- Can run `kubectl exec -it <idle-pod-name> -- /bin/sh` if you want an interactive shell (useful to `ls /mnt`)
 - `kubectl cp <idle-pod-name>:/mnt/trained_model.pth trained_model.pth`
 
 ### Cleanup
