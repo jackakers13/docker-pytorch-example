@@ -10,9 +10,9 @@
 - `sudo nvidia-ctk runtime configure --runtime=docker`
 - `sudo systemctl restart docker`
 
-# (Optional - this is how you would do it if you weren't using a custom image)
+### (Optional - this is how you would do it if you weren't using a custom image)
 - `docker pull pytorch/pytorch:2.4.1-cuda11.8-cudnn9-devel`
-# Required - build and run custom image derived from official
+### Required - build and run custom image derived from official
 - `./docker-build.sh`
 - `./docker-run.sh`
 - `python3 ./pytorch_example.py`
