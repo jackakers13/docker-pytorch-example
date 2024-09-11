@@ -79,3 +79,7 @@ with torch.no_grad():
         correct += (predicted == target).sum().item()
 
 print(f'Test Accuracy: {100 * correct / total:.2f}%')
+
+model_save_path = '/root/host_fs/trained_model.pth'
+torch.save(model.state_dict(), model_save_path)
+print(f'Model saved to "{model_save_path}"!')
